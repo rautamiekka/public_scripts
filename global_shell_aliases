@@ -1,5 +1,7 @@
 ##Without a shebang so other shells than Bash can benefit.##
 
+##Typically loaded through the in-built `source` command in Bash.
+
 
 ##Compress using P7-Zip with LZMA2 and 64MB dictionary size. The best that still works on 32-bit software and system.
 ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
