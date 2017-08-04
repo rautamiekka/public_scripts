@@ -5,42 +5,42 @@
 
 ##Compress using P7-Zip with LZMA2 and 64MB dictionary size. The best that still works on 32-bit software and system.
 ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
-##  which in turn makes the compression slow.
+##  which in turn makes the compression slower.
 alias 7zfull64='ionice -c 2 -n 7 nice -n 20 7z a -t7z -mx=9 -ms=on -mf=on -mhc=on -mhe=off -m0=LZMA2 -ma=1 -md=64m -mmf=bt4 -mfb=273 -mmc=1000000000 -mlc=3 -mlp=1 -mpb=4 -mmt=1 -mtc=off '
 
 ##Compress using P7-Zip with LZMA2 and 128MB dictionary size. Doesn't work on 32-bit software nor system.
 ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
-##  which in turn makes the compression slow.
+##  which in turn makes the compression slower.
 alias 7zfull128='ionice -c 2 -n 7 nice -n 20 7z a -t7z -mx=9 -ms=on -mf=on -mhc=on -mhe=off -m0=LZMA2 -ma=1 -md=128m -mmf=bt4 -mfb=273 -mmc=1000000000 -mlc=3 -mlp=1 -mpb=4 -mmt=1 -mtc=off '
 
 ##Compress using P7-Zip with LZMA2 and 256MB dictionary size. Doesn't work on 32-bit software nor system.
 ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
-##  which in turn makes the compression slow.
+##  which in turn makes the compression slower.
 alias 7zfull256='ionice -c 2 -n 7 nice -n 20 7z a -t7z -mx=9 -ms=on -mf=on -mhc=on -mhe=off -m0=LZMA2 -ma=1 -md=256m -mmf=bt4 -mfb=273 -mmc=1000000000 -mlc=3 -mlp=1 -mpb=4 -mmt=1 -mtc=off '
 
 ##Compress using P7-Zip with LZMA2 and 512MB dictionary size. Doesn't work on 32-bit software nor system.
 ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
-##  which in turn makes the compression slow.
+##  which in turn makes the compression slower.
 alias 7zfull256='ionice -c 2 -n 7 nice -n 20 7z a -t7z -mx=9 -ms=on -mf=on -mhc=on -mhe=off -m0=LZMA2 -ma=1 -md=512m -mmf=bt4 -mfb=273 -mmc=1000000000 -mlc=3 -mlp=1 -mpb=4 -mmt=1 -mtc=off '
 
 ##Compress using XZ with LZMA2 and 64MB dictionary size and 3 threads if `xz-utils` is new enough. The best that still works on 32-bit software nor system.
 ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
-##  which in turn makes the compression slow.
+##  which in turn makes the compression slower.
 alias xzfull64='ionice -c 2 -n 7 nice -n 20 xz -vvz9e --lzma2=dict=64MiB,mf=bt4,nice=273 --threads=3 '
 
 ##Compress using XZ with LZMA2 and 128MB dictionary size and 3 threads if `xz-utils` is new enough. Doesn't work on 32-bit software nor system.
 ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
-##  which in turn makes the compression slow.
+##  which in turn makes the compression slower.
 alias xzfull128='ionice -c 2 -n 7 nice -n 20 xz -vvz9e --lzma2=dict=128MiB,mf=bt4,nice=273 --threads=3 '
 
 ##Compress using XZ with LZMA2 and 256MB dictionary size and 3 threads if `xz-utils` is new enough. Doesn't work on 32-bit software nor system.
 ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
-##  which in turn makes the compression slow.
+##  which in turn makes the compression slower.
 alias xzfull256='ionice -c 2 -n 7 nice -n 20 xz -vvz9e --lzma2=dict=256MiB,mf=bt4,nice=273 --threads=3 '
 
 ##Compress using XZ with LZMA2 and 512MB dictionary size and 3 threads if `xz-utils` is new enough. Doesn't work on 32-bit software nor system.
 ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
-##  which in turn makes the compression slow.
+##  which in turn makes the compression slower.
 alias xzfull256='ionice -c 2 -n 7 nice -n 20 xz -vvz9e --lzma2=dict=512MiB,mf=bt4,nice=273 --threads=3 '
 
 ##Update package listing and show updatable packages.
