@@ -1,7 +1,7 @@
 ##Without a shebang so other shells than Bash can benefit.##
 
 
-##Compress using P7-Zip with LZMA2 and 64MB dictionary size. The best that still works on 32-bit software nor system.
+##Compress using P7-Zip with LZMA2 and 64MB dictionary size. The best that still works on 32-bit software and system.
 alias 7zfull64='ionice -c 2 -n 7 nice -n 20 7z a -t7z -mx=9 -ms=on -mf=on -mhc=on -mhe=off -m0=LZMA2 -ma=1 -md=64m -mmf=bt4 -mfb=273 -mmc=1000000000 -mlc=3 -mlp=1 -mpb=4 -mmt=1 -mtc=off '
 
 ##Compress using P7-Zip with LZMA2 and 128MB dictionary size. Doesn't work on 32-bit software nor system.
@@ -26,5 +26,18 @@ alias xzfull256='ionice -c 2 -n 7 nice -n 20 xz -vvz9e --lzma2=dict=256MiB,mf=bt
 alias xzfull256='ionice -c 2 -n 7 nice -n 20 xz -vvz9e --lzma2=dict=512MiB,mf=bt4,nice=273 --threads=3 '
 
 ##Update package listing and show updatable packages.
-alias upg='sudo aptitude update; sudo aptitude full-upgrade'
+alias upg='sudo aptitude update; sudo aptitude full-upgrade '
+
+##Make both `htop` and `top` have the lowest possible non-idle priorities.
+alias htop='sudo ionice -c 2 -n 7 nice -n 20 htop '
+alias top='sudo ionice -c 2 -n 7 nice -n 20 top '
+
+##Make `ethstatus` have the lowest possible non-idle priorities.
+alias ethstatus='sudo ionice -c 2 -n 7 nice -n 20 ethstatus '
+
+##Optional: same as above, but for first WLAN.
+#alias ethstatus_wlan0='sudo ionice -c 2 -n 7 nice -n 20 ethstatus -i wlan0 '
+
+##Make `iotop` have the lowest possible non-idle priorities and show only the processes which are doing IO.
+alias iotop='sudo ionice -c 2 -n 7 nice -n 20 iotop -o '
 
