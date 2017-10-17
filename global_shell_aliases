@@ -2,111 +2,129 @@
 
 ##Typically loaded through the in-built `source` command in Bash.
 
+##Enable only if `7z` is somehow installed in `$PATH`.
+if [ "$(command -v 7z)" ]; then
+    ##Compress using P7-Zip with LZMA2 and 64MB dictionary size. The best that still works on 32-bit software and system.
+    ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
+    ##  which in turn makes the compression slower.
+    alias 7zfull64='ionice -c 2 -n 7 nice -n 20 7z a -t7z -mx=9 -ms=on -mf=on -mhc=on -mhe=off -m0=LZMA2 -ma=1 -md=64m -mmf=bt4 -mfb=273 -mmc=1000000000 -mlc=3 -mlp=1 -mpb=4 -mmt=1 -mtc=off '
 
-##Compress using P7-Zip with LZMA2 and 64MB dictionary size. The best that still works on 32-bit software and system.
-##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
-##  which in turn makes the compression slower.
-alias 7zfull64='ionice -c 2 -n 7 nice -n 20 7z a -t7z -mx=9 -ms=on -mf=on -mhc=on -mhe=off -m0=LZMA2 -ma=1 -md=64m -mmf=bt4 -mfb=273 -mmc=1000000000 -mlc=3 -mlp=1 -mpb=4 -mmt=1 -mtc=off '
+    ##Compress using P7-Zip with LZMA2 and 128MB dictionary size. Doesn't work on 32-bit software nor system.
+    ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
+    ##  which in turn makes the compression slower.
+    alias 7zfull128='ionice -c 2 -n 7 nice -n 20 7z a -t7z -mx=9 -ms=on -mf=on -mhc=on -mhe=off -m0=LZMA2 -ma=1 -md=128m -mmf=bt4 -mfb=273 -mmc=1000000000 -mlc=3 -mlp=1 -mpb=4 -mmt=1 -mtc=off '
 
-##Compress using P7-Zip with LZMA2 and 128MB dictionary size. Doesn't work on 32-bit software nor system.
-##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
-##  which in turn makes the compression slower.
-alias 7zfull128='ionice -c 2 -n 7 nice -n 20 7z a -t7z -mx=9 -ms=on -mf=on -mhc=on -mhe=off -m0=LZMA2 -ma=1 -md=128m -mmf=bt4 -mfb=273 -mmc=1000000000 -mlc=3 -mlp=1 -mpb=4 -mmt=1 -mtc=off '
+    ##Compress using P7-Zip with LZMA2 and 192MB dictionary size. Doesn't work on 32-bit software nor system.
+    ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
+    ##  which in turn makes the compression slower.
+    alias 7zfull192='ionice -c 2 -n 7 nice -n 20 7z a -t7z -mx=9 -ms=on -mf=on -mhc=on -mhe=off -m0=LZMA2 -ma=1 -md=192m -mmf=bt4 -mfb=273 -mmc=1000000000 -mlc=3 -mlp=1 -mpb=4 -mmt=1 -mtc=off '
 
-##Compress using P7-Zip with LZMA2 and 192MB dictionary size. Doesn't work on 32-bit software nor system.
-##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
-##  which in turn makes the compression slower.
-alias 7zfull192='ionice -c 2 -n 7 nice -n 20 7z a -t7z -mx=9 -ms=on -mf=on -mhc=on -mhe=off -m0=LZMA2 -ma=1 -md=192m -mmf=bt4 -mfb=273 -mmc=1000000000 -mlc=3 -mlp=1 -mpb=4 -mmt=1 -mtc=off '
+    ##Compress using P7-Zip with LZMA2 and 256MB dictionary size. Doesn't work on 32-bit software nor system.
+    ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
+    ##  which in turn makes the compression slower.
+    alias 7zfull256='ionice -c 2 -n 7 nice -n 20 7z a -t7z -mx=9 -ms=on -mf=on -mhc=on -mhe=off -m0=LZMA2 -ma=1 -md=256m -mmf=bt4 -mfb=273 -mmc=1000000000 -mlc=3 -mlp=1 -mpb=4 -mmt=1 -mtc=off '
 
-##Compress using P7-Zip with LZMA2 and 256MB dictionary size. Doesn't work on 32-bit software nor system.
-##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
-##  which in turn makes the compression slower.
-alias 7zfull256='ionice -c 2 -n 7 nice -n 20 7z a -t7z -mx=9 -ms=on -mf=on -mhc=on -mhe=off -m0=LZMA2 -ma=1 -md=256m -mmf=bt4 -mfb=273 -mmc=1000000000 -mlc=3 -mlp=1 -mpb=4 -mmt=1 -mtc=off '
+    ##Compress using P7-Zip with LZMA2 and 384MB dictionary size. Doesn't work on 32-bit software nor system.
+    ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
+    ##  which in turn makes the compression slower.
+    alias 7zfull384='ionice -c 2 -n 7 nice -n 20 7z a -t7z -mx=9 -ms=on -mf=on -mhc=on -mhe=off -m0=LZMA2 -ma=1 -md=384m -mmf=bt4 -mfb=273 -mmc=1000000000 -mlc=3 -mlp=1 -mpb=4 -mmt=1 -mtc=off '
 
-##Compress using P7-Zip with LZMA2 and 384MB dictionary size. Doesn't work on 32-bit software nor system.
-##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
-##  which in turn makes the compression slower.
-alias 7zfull384='ionice -c 2 -n 7 nice -n 20 7z a -t7z -mx=9 -ms=on -mf=on -mhc=on -mhe=off -m0=LZMA2 -ma=1 -md=384m -mmf=bt4 -mfb=273 -mmc=1000000000 -mlc=3 -mlp=1 -mpb=4 -mmt=1 -mtc=off '
+    ##Compress using P7-Zip with LZMA2 and 512MB dictionary size. Doesn't work on 32-bit software nor system.
+    ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
+    ##  which in turn makes the compression slower.
+    alias 7zfull512='ionice -c 2 -n 7 nice -n 20 7z a -t7z -mx=9 -ms=on -mf=on -mhc=on -mhe=off -m0=LZMA2 -ma=1 -md=512m -mmf=bt4 -mfb=273 -mmc=1000000000 -mlc=3 -mlp=1 -mpb=4 -mmt=1 -mtc=off '
 
-##Compress using P7-Zip with LZMA2 and 512MB dictionary size. Doesn't work on 32-bit software nor system.
-##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
-##  which in turn makes the compression slower.
-alias 7zfull512='ionice -c 2 -n 7 nice -n 20 7z a -t7z -mx=9 -ms=on -mf=on -mhc=on -mhe=off -m0=LZMA2 -ma=1 -md=512m -mmf=bt4 -mfb=273 -mmc=1000000000 -mlc=3 -mlp=1 -mpb=4 -mmt=1 -mtc=off '
+    ##Compress using P7-Zip with LZMA2 and 768MB dictionary size. Doesn't work on 32-bit software nor system.
+    ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
+    ##  which in turn makes the compression slower.
+    alias 7zfull768='ionice -c 2 -n 7 nice -n 20 7z a -t7z -mx=9 -ms=on -mf=on -mhc=on -mhe=off -m0=LZMA2 -ma=1 -md=768m -mmf=bt4 -mfb=273 -mmc=1000000000 -mlc=3 -mlp=1 -mpb=4 -mmt=1 -mtc=off '
 
-##Compress using P7-Zip with LZMA2 and 768MB dictionary size. Doesn't work on 32-bit software nor system.
-##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
-##  which in turn makes the compression slower.
-alias 7zfull768='ionice -c 2 -n 7 nice -n 20 7z a -t7z -mx=9 -ms=on -mf=on -mhc=on -mhe=off -m0=LZMA2 -ma=1 -md=768m -mmf=bt4 -mfb=273 -mmc=1000000000 -mlc=3 -mlp=1 -mpb=4 -mmt=1 -mtc=off '
+    ##Compress using P7-Zip with LZMA2 and 1024MB dictionary size. Doesn't work on 32-bit software nor system.
+    ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
+    ##  which in turn makes the compression slower.
+    alias 7zfull1024='ionice -c 2 -n 7 nice -n 20 7z a -t7z -mx=9 -ms=on -mf=on -mhc=on -mhe=off -m0=LZMA2 -ma=1 -md=1024m -mmf=bt4 -mfb=273 -mmc=1000000000 -mlc=3 -mlp=1 -mpb=4 -mmt=1 -mtc=off '
 
-##Compress using P7-Zip with LZMA2 and 1024MB dictionary size. Doesn't work on 32-bit software nor system.
-##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
-##  which in turn makes the compression slower.
-alias 7zfull1024='ionice -c 2 -n 7 nice -n 20 7z a -t7z -mx=9 -ms=on -mf=on -mhc=on -mhe=off -m0=LZMA2 -ma=1 -md=1024m -mmf=bt4 -mfb=273 -mmc=1000000000 -mlc=3 -mlp=1 -mpb=4 -mmt=1 -mtc=off '
+    ##Compress using P7-Zip with LZMA2 and 1536MB dictionary size. Doesn't work on 32-bit software nor system.
+    ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
+    ##  which in turn makes the compression slower.
+    alias 7zfull1536='ionice -c 2 -n 7 nice -n 20 7z a -t7z -mx=9 -ms=on -mf=on -mhc=on -mhe=off -m0=LZMA2 -ma=1 -md=1536m -mmf=bt4 -mfb=273 -mmc=1000000000 -mlc=3 -mlp=1 -mpb=4 -mmt=1 -mtc=off '
 
-##Compress using P7-Zip with LZMA2 and 1536MB dictionary size. Doesn't work on 32-bit software nor system.
-##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
-##  which in turn makes the compression slower.
-alias 7zfull1536='ionice -c 2 -n 7 nice -n 20 7z a -t7z -mx=9 -ms=on -mf=on -mhc=on -mhe=off -m0=LZMA2 -ma=1 -md=1536m -mmf=bt4 -mfb=273 -mmc=1000000000 -mlc=3 -mlp=1 -mpb=4 -mmt=1 -mtc=off '
+    ################################################################################
+
+    ##Compress using XZ with LZMA2 and 64MB dictionary size and 3 threads if `xz-utils` is new enough. The best that still works on 32-bit software nor system.
+    ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
+    ##  which in turn makes the compression slower.
+    alias xzfull64='ionice -c 2 -n 7 nice -n 20 xz -vvz9e --lzma2=dict=64MiB,mf=bt4,nice=273 --threads=3 '
+
+    ##Compress using XZ with LZMA2 and 128MB dictionary size and 3 threads if `xz-utils` is new enough. Doesn't work on 32-bit software nor system.
+    ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
+    ##  which in turn makes the compression slower.
+    alias xzfull128='ionice -c 2 -n 7 nice -n 20 xz -vvz9e --lzma2=dict=128MiB,mf=bt4,nice=273 --threads=3 '
+
+    ##Compress using XZ with LZMA2 and 256MB dictionary size and 3 threads if `xz-utils` is new enough. Doesn't work on 32-bit software nor system.
+    ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
+    ##  which in turn makes the compression slower.
+    alias xzfull256='ionice -c 2 -n 7 nice -n 20 xz -vvz9e --lzma2=dict=256MiB,mf=bt4,nice=273 --threads=3 '
+
+    ##Compress using XZ with LZMA2 and 384MB dictionary size and 3 threads if `xz-utils` is new enough. Doesn't work on 32-bit software nor system.
+    ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
+    ##  which in turn makes the compression slower.
+    alias xzfull384='ionice -c 2 -n 7 nice -n 20 xz -vvz9e --lzma2=dict=384MiB,mf=bt4,nice=273 --threads=3 '
+
+    ##Compress using XZ with LZMA2 and 512MB dictionary size and 3 threads if `xz-utils` is new enough. Doesn't work on 32-bit software nor system.
+    ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
+    ##  which in turn makes the compression slower.
+    alias xzfull512='ionice -c 2 -n 7 nice -n 20 xz -vvz9e --lzma2=dict=512MiB,mf=bt4,nice=273 --threads=3 '
+
+    ##Compress using XZ with LZMA2 and 768MB dictionary size and 3 threads if `xz-utils` is new enough. Doesn't work on 32-bit software nor system.
+    ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
+    ##  which in turn makes the compression slower.
+    alias xzfull768='ionice -c 2 -n 7 nice -n 20 xz -vvz9e --lzma2=dict=768MiB,mf=bt4,nice=273 --threads=3 '
+
+    ##Compress using XZ with LZMA2 and 1024MB dictionary size and 3 threads if `xz-utils` is new enough. Doesn't work on 32-bit software nor system.
+    ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
+    ##  which in turn makes the compression slower.
+    alias xzfull1024='ionice -c 2 -n 7 nice -n 20 xz -vvz9e --lzma2=dict=1024MiB,mf=bt4,nice=273 --threads=3 '
+
+    ##Compress using XZ with LZMA2 and 1536MB dictionary size and 3 threads if `xz-utils` is new enough. Doesn't work on 32-bit software nor system.
+    ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
+    ##  which in turn makes the compression slower.
+    alias xzfull1536='ionice -c 2 -n 7 nice -n 20 xz -vvz9e --lzma2=dict=1536MiB,mf=bt4,nice=273 --threads=3 '
+fi
 
 ################################################################################
 
-##Compress using XZ with LZMA2 and 64MB dictionary size and 3 threads if `xz-utils` is new enough. The best that still works on 32-bit software nor system.
-##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
-##  which in turn makes the compression slower.
-alias xzfull64='ionice -c 2 -n 7 nice -n 20 xz -vvz9e --lzma2=dict=64MiB,mf=bt4,nice=273 --threads=3 '
+if [ "$(command -v aptitude)" ]; then
+    ##Update package listing and show updatable packages.
+    ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
+    ##  which in turn potentially makes the upgrade process slower since every process spawned by `aptitude` will inherit its priorities.
+    alias upg='sudo aptitude update; sudo aptitude full-upgrade '
+fi
 
-##Compress using XZ with LZMA2 and 128MB dictionary size and 3 threads if `xz-utils` is new enough. Doesn't work on 32-bit software nor system.
-##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
-##  which in turn makes the compression slower.
-alias xzfull128='ionice -c 2 -n 7 nice -n 20 xz -vvz9e --lzma2=dict=128MiB,mf=bt4,nice=273 --threads=3 '
+##Make both `htop` and `top` have the lowest possible non-idle priorities.##
+if [ "$(command -v htop)" ]; then
+    alias htop='sudo ionice -c 2 -n 7 nice -n 20 htop '
+fi
 
-##Compress using XZ with LZMA2 and 256MB dictionary size and 3 threads if `xz-utils` is new enough. Doesn't work on 32-bit software nor system.
-##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
-##  which in turn makes the compression slower.
-alias xzfull256='ionice -c 2 -n 7 nice -n 20 xz -vvz9e --lzma2=dict=256MiB,mf=bt4,nice=273 --threads=3 '
+if [ "$(command -v top)" ]; then
+    alias top='sudo ionice -c 2 -n 7 nice -n 20 top '
+fi
+############################################################################
 
-##Compress using XZ with LZMA2 and 384MB dictionary size and 3 threads if `xz-utils` is new enough. Doesn't work on 32-bit software nor system.
-##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
-##  which in turn makes the compression slower.
-alias xzfull384='ionice -c 2 -n 7 nice -n 20 xz -vvz9e --lzma2=dict=384MiB,mf=bt4,nice=273 --threads=3 '
+if [ "$(command -v ethstatus)" ]; then
+    ##Make `ethstatus` have the lowest possible non-idle priorities.
+    alias ethstatus='sudo ionice -c 2 -n 7 nice -n 20 ethstatus '
 
-##Compress using XZ with LZMA2 and 512MB dictionary size and 3 threads if `xz-utils` is new enough. Doesn't work on 32-bit software nor system.
-##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
-##  which in turn makes the compression slower.
-alias xzfull512='ionice -c 2 -n 7 nice -n 20 xz -vvz9e --lzma2=dict=512MiB,mf=bt4,nice=273 --threads=3 '
+    ##Optional: same as above, but for first WLAN.
+    #alias ethstatus_wlan0='sudo ionice -c 2 -n 7 nice -n 20 ethstatus -i wlan0 '
+fi
 
-##Compress using XZ with LZMA2 and 768MB dictionary size and 3 threads if `xz-utils` is new enough. Doesn't work on 32-bit software nor system.
-##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
-##  which in turn makes the compression slower.
-alias xzfull768='ionice -c 2 -n 7 nice -n 20 xz -vvz9e --lzma2=dict=768MiB,mf=bt4,nice=273 --threads=3 '
+if [ "$(command -v iotop)" ]; then
+    ##Make `iotop` have the lowest possible non-idle priorities and show only the processes which are doing IO.
+    alias iotop='sudo ionice -c 2 -n 7 nice -n 20 iotop -o '
+fi
 
-##Compress using XZ with LZMA2 and 1024MB dictionary size and 3 threads if `xz-utils` is new enough. Doesn't work on 32-bit software nor system.
-##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
-##  which in turn makes the compression slower.
-alias xzfull1024='ionice -c 2 -n 7 nice -n 20 xz -vvz9e --lzma2=dict=1024MiB,mf=bt4,nice=273 --threads=3 '
-
-##Compress using XZ with LZMA2 and 1536MB dictionary size and 3 threads if `xz-utils` is new enough. Doesn't work on 32-bit software nor system.
-##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
-##  which in turn makes the compression slower.
-alias xzfull1536='ionice -c 2 -n 7 nice -n 20 xz -vvz9e --lzma2=dict=1536MiB,mf=bt4,nice=273 --threads=3 '
-
-################################################################################
-
-##Update package listing and show updatable packages.
-##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
-##  which in turn potentially makes the upgrade process slower since every process spawned by `aptitude` will inherit its priorities.
-alias upg='sudo aptitude update; sudo aptitude full-upgrade '
-
-##Make both `htop` and `top` have the lowest possible non-idle priorities.
-alias htop='sudo ionice -c 2 -n 7 nice -n 20 htop '
-alias top='sudo ionice -c 2 -n 7 nice -n 20 top '
-
-##Make `ethstatus` have the lowest possible non-idle priorities.
-alias ethstatus='sudo ionice -c 2 -n 7 nice -n 20 ethstatus '
-
-##Optional: same as above, but for first WLAN.
-#alias ethstatus_wlan0='sudo ionice -c 2 -n 7 nice -n 20 ethstatus -i wlan0 '
-
-##Make `iotop` have the lowest possible non-idle priorities and show only the processes which are doing IO.
-alias iotop='sudo ionice -c 2 -n 7 nice -n 20 iotop -o '
-
+if [ "$(command -v dpkg)" ]; then
+    ##If it doesn't print anything but the standard warning about GNOME Virtual File System, it's safe to manually delete the lock.
+    alias print_dpkg_lock_holders='sudo lsof | '\''grep /var/lib/dpkg/lock'\'' '
+fi
