@@ -1,6 +1,6 @@
 ##Without a shebang so other shells than Bash can benefit.##
 
-##Typically loaded through the in-built `source` command in Bash.
+##Typically loaded through the in-built `source` command (in Bash).
 
 ##Enable only if `7z` is somehow installed in `$PATH`.
 if [ "$(command -v 7z)" ]; then
@@ -48,9 +48,12 @@ if [ "$(command -v 7z)" ]; then
     ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
     ##  which in turn makes the compression slower.
     alias 7zfull1536='ionice -c 2 -n 7 nice -n 20 7z a -t7z -mx=9 -ms=on -mf=on -mhc=on -mhe=off -m0=LZMA2 -ma=1 -md=1536m -mmf=bt4 -mfb=273 -mmc=1000000000 -mlc=3 -mlp=1 -mpb=4 -mmt=1 -mtc=off '
+fi
 
-    ################################################################################
+################################################################################
 
+##Enable only if `xz` is somehow installed in `$PATH`.
+if [ "$(command -v xz)" ]; then
     ##Compress using XZ with LZMA2 and 64MB dictionary size and 3 threads if `xz-utils` is new enough. The best that still works on 32-bit software nor system.
     ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
     ##  which in turn makes the compression slower.
@@ -101,7 +104,7 @@ if [ "$(command -v aptitude)" ]; then
     alias upg='sudo aptitude update; sudo aptitude full-upgrade '
 fi
 
-##Make both `htop` and `top` have the lowest possible non-idle priorities.##
+####Make both `htop` and `top` have the lowest possible non-idle priorities.####
 if [ "$(command -v htop)" ]; then
     alias htop='sudo ionice -c 2 -n 7 nice -n 20 htop '
 fi
@@ -109,7 +112,7 @@ fi
 if [ "$(command -v top)" ]; then
     alias top='sudo ionice -c 2 -n 7 nice -n 20 top '
 fi
-############################################################################
+################################################################################
 
 if [ "$(command -v ethstatus)" ]; then
     ##Make `ethstatus` have the lowest possible non-idle priorities.
