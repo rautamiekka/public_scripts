@@ -1,3 +1,5 @@
+REM REM NOTE: This'll auto-delete the FLAC after FFmpeg terminates.
+
 IF [%1] == [] (
     GOTO :EOF
 )
