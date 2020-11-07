@@ -1,4 +1,5 @@
 ##Without a shebang so other shells than Bash can benefit.##
+# shellcheck shell=bash  #As far as ShellCheck is considered it can think of the script as a Bash script since that's usually what I'm writing for, and Zsh runs most Bash scripts as is anyway; sadly ShellCheck doesn't support Zsh.
 
 ##Typically loaded through the in-built `source` command (in Bash).
 
@@ -8,7 +9,11 @@ for MB in 64 128 192 256 384 512 768 1000; do
     ##    Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
     ##      which in turn makes the compression slower.
     if [ "$(command -v 7z)" ]; then
-        alias 7zfull${MB}='ionice -c 2 -n 7 nice -n 20 7z a -t7z -mx=9 -ms=on -mhc=on -mhe=off -m0=LZMA2:a=1:d='${MB}'m:mf=bt4:fb=273:mc=1000000000:lc=3:lp=1:pb=4 -mmt=1 -mtc=off '
+        # shellcheck disable=SC2139  #We know the var expands during definition of the alias.
+        alias 7zfull${MB}='echo '\''NOTE: §7zfull'"${MB}"'§ stores the target data of a symlink instead of the symlink itself.'\''; ionice -c 2 -n 7 nice -n 20 7z a -t7z -mx=9 -ms=on -mhc=on -mhe=off -m0=LZMA2:a=1:d='"${MB}"'m:mf=bt4:fb=273:mc=1000000000:lc=3:lp=1:pb=4 -mmt=1 -mtc=off -bb3 -bt -ssw '
+
+        # shellcheck disable=SC2139  #We know the var expands during the definition of the alias.
+        alias 7zfullsym${MB}='echo '\''NOTE: §7zfullsym'"${MB}"'§ stores symlinks as is instead of the target data.'\''; ionice -c 2 -n 7 nice -n 20 7z a -t7z -mx=9 -ms=on -mhc=on -mhe=off -m0=LZMA2:a=1:d='"${MB}"'m:mf=bt4:fb=273:mc=1000000000:lc=3:lp=1:pb=4 -mmt=1 -mtc=off -bb3 -bt -ssw '
     fi
 
     ##Enable only if `xz` is somehow installed in `$PATH`.
@@ -16,16 +21,20 @@ for MB in 64 128 192 256 384 512 768 1000; do
     ##    Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
     ##      which in turn makes the compression slower.
     if [ "$(command -v xz)" ]; then
-        alias xzfull${MB}='ionice -c 2 -n 7 nice -n 20 xz -vvz9e --lzma2=dict='${MB}'MiB,mf=bt4,nice=273 --threads=3 '
+        # shellcheck disable=SC2139  #We know the var expands during the definition of the alias.
+        alias xzfull${MB}='ionice -c 2 -n 7 nice -n 20 xz -vvz9e --lzma2=dict='"${MB}"'MiB,mf=bt4,nice=273 --threads=3 '
     fi
 done
 
-if [ "$(command -v aptitude)" ]; then
-    ##Update package listing and show updatable packages.
-    ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
-    ##  which in turn potentially makes the upgrade process slower since every process spawned by `aptitude` will inherit its priorities.
-    alias upg='sudo aptitude update; sudo aptitude full-upgrade '
-fi
+for APP in aptitude apt apt-get; do
+    if [ "$(command -v ${APP})" ]; then
+        ##Update package listing and show updatable packages, only creating an alias matching the app in the given order.
+        ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
+        ##  which in turn potentially makes the upgrade process slower since every process spawned by `aptitude` will inherit its priorities.
+        # shellcheck disable=SC2139  #We know the var expands during the definition of the alias.
+        alias upg='sudo '"${APP}"' update; sudo '"${APP}"' full-upgrade ' && break
+    fi
+done
 
 if [ "$(command -v ethstatus)" ]; then
     ##Make `ethstatus` have the lowest possible non-idle priorities.
@@ -42,13 +51,14 @@ fi
 
 if [ "$(command -v dpkg)" ]; then
     ##If it doesn't print anything but the standard warning about GNOME Virtual File System, it's safe to manually delete the lock.
-    alias print_dpkg_lock_holders='sudo lsof | '\''grep /var/lib/dpkg/lock'\'' '
+    alias print_dpkg_lock_holders='sudo lsof | grep '\''/var/lib/dpkg/lock'\'' '
 fi
 
 ####Make both `htop`, `top`, and any other programs have the lowest possible non-idle priorities.####
 for program in htop top; do
     if [ "$(command -v ${program})" ]; then
-        alias ${program}='sudo ionice -c 2 -n 7 nice -n 20 '${program}' '
+        # shellcheck disable=SC2139  #We know the var expands during the definition of the alias.
+        alias ${program}='sudo ionice -c 2 -n 7 nice -n 20 '"${program}"' '
     fi
 done
 ################################################################################
