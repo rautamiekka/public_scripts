@@ -7,7 +7,7 @@ SAVIFILE=sav-linux-free-9.tgz
 ##END
 
 [ -f ./${SAVIFILE} ] && {
-    tar -xvf ./${SAVIFILE}
+    tar -xvf ./${SAVIFILE} || return
     cd sophos-av || return
 }
 
