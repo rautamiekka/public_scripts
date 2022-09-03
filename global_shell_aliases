@@ -3,36 +3,40 @@
 
 ##Typically loaded through the in-built `source` command (in Bash).
 
-for MB in 64 128 192 256 384 512 768 1000; do
+##Change this according to what the 7-Zip binary is called on your system.
+##  As of Ubuntu 22.04 LTS the package is called `7zip` in which the binary is called `7zz`. The old package `p7zip[-full]` in which it's called `7z` was abandoned for ages and not updated beyond 16.02. The one for Ubuntu 22.04 LTS is still behind Ubuntu 22.10, but still better than the ancient 7-Zip 16.02.
+_binary_7z='7zz'
+
+for _mb in 64 128 192 256 384 512 768 1000 1536; do
     ##Enable only if `7z` is somehow installed in `$PATH`.
-    ##  Compress using P7-Zip with LZMA2 and ${MB}MB dictionary size. 64MB still works on 32-bit software and system.
+    ##  Compress using P7-Zip with LZMA2 and ${_mb}MB dictionary size. 64MB still works on 32-bit software and system.
     ##    Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
     ##      which in turn makes the compression slower.
     if [ "$(command -v 7z)" ]; then
         # shellcheck disable=SC2139  #We know the var expands during definition of the alias.
-        alias 7zfull${MB}='echo '\''NOTE: §7zfull'"${MB}"'§ stores the target data of a symlink instead of the symlink itself.'\''; ionice -c 2 -n 7 nice -n 20 7z a -t7z -mx=9 -ms=on -mhc=on -mhe=off -m0=LZMA2:a=1:d='"${MB}"'m:mf=bt4:fb=273:mc=1000000000:lc=3:lp=1:pb=4 -mmt=1 -mtc=off -bb3 -bt -ssw '
+        alias 7zfull${_mb}='echo '\''NOTE: §7zfull'"${_mb}"'§ stores the target data of a symlink instead of the symlink itself.'\''; ionice -c 2 -n 7 nice -n 20 '"${_binary_7z}"' a -t7z -mx=9 -ms=on -mhc=on -mhe=off -m0=LZMA2:a=1:d='"${_mb}"'m:mf=bt4:fb=273:mc=1000000000:lc=3:lp=1:pb=4 -mmt=1 -mtc=off -bb3 -bt -ssw '
 
         # shellcheck disable=SC2139  #We know the var expands during the definition of the alias.
-        alias 7zfullsym${MB}='echo '\''NOTE: §7zfullsym'"${MB}"'§ stores symlinks as is instead of the target data.'\''; ionice -c 2 -n 7 nice -n 20 7z a -t7z -mx=9 -ms=on -mhc=on -mhe=off -m0=LZMA2:a=1:d='"${MB}"'m:mf=bt4:fb=273:mc=1000000000:lc=3:lp=1:pb=4 -mmt=1 -mtc=off -bb3 -bt -ssw '
+        alias 7zfullsym${_mb}='echo '\''NOTE: §7zfullsym'"${_mb}"'§ stores symlinks as is instead of the target data.'\''; ionice -c 2 -n 7 nice -n 20 '"${_binary_7z}"' a -t7z -mx=9 -ms=on -mhc=on -mhe=off -m0=LZMA2:a=1:d='"${_mb}"'m:mf=bt4:fb=273:mc=1000000000:lc=3:lp=1:pb=4 -mmt=1 -mtc=off -bb3 -bt -ssw '
     fi
 
     ##Enable only if `xz` is somehow installed in `$PATH`.
-    ##  Compress using XZ with LZMA2 and ${MB}MB dictionary size. 64MB still works on 32-bit software and system.
+    ##  Compress using XZ with LZMA2 and ${_mb}MB dictionary size. 64MB still works on 32-bit software and system.
     ##    Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
     ##      which in turn makes the compression slower.
     if [ "$(command -v xz)" ]; then
         # shellcheck disable=SC2139  #We know the var expands during the definition of the alias.
-        alias xzfull${MB}='ionice -c 2 -n 7 nice -n 20 xz -vvz9e --lzma2=dict='"${MB}"'MiB,mf=bt4,nice=273 --threads=3 '
+        alias xzfull${_mb}='ionice -c 2 -n 7 nice -n 20 xz -vvz9e --lzma2=dict='"${_mb}"'MiB,mf=bt4,nice=273 --threads=3 '
     fi
 done
 
-for APP in aptitude apt apt-get; do
-    if [ "$(command -v ${APP})" ]; then
+for _app in aptitude apt apt-get; do
+    if [ "$(command -v ${_app})" ]; then
         ##Update package listing and show updatable packages, only creating an alias matching the app in the given order.
         ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
-        ##  which in turn potentially makes the upgrade process slower since every process spawned by `aptitude` will inherit its priorities.
+        ##  which in turn potentially makes the upgrade process slower since every process spawned by ${_app} will inherit its priorities.
         # shellcheck disable=SC2139  #We know the var expands during the definition of the alias.
-        alias upg='sudo '"${APP}"' update; sudo '"${APP}"' full-upgrade ' && break
+        alias upg='sudo '"${_app}"' update; sudo '"${_app}"' full-upgrade ' && break
     fi
 done
 
@@ -55,10 +59,10 @@ if [ "$(command -v dpkg)" ]; then
 fi
 
 ####Make both `htop`, `top`, and any other programs have the lowest possible non-idle priorities.####
-for program in htop top; do
-    if [ "$(command -v ${program})" ]; then
+for _app in htop top btop; do
+    if [ "$(command -v ${_app})" ]; then
         # shellcheck disable=SC2139  #We know the var expands during the definition of the alias.
-        alias ${program}='sudo ionice -c 2 -n 7 nice -n 20 '"${program}"' '
+        alias ${_app}='sudo ionice -c 2 -n 7 nice -n 20 '"${_app}"' '
     fi
 done
 ################################################################################
