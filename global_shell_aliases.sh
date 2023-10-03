@@ -63,7 +63,7 @@ done
 }
 
 ####Make both `htop`, `top`, and any other programs have the lowest possible non-idle priorities.####
-for _app in htop top btop; do
+for _app in 'htop' 'top' 'btop'; do
     [ "$(command -v "${_app}")" ] && {
         # shellcheck disable=SC2139  #We know the var expands during the definition of the alias.
         alias ${_app}='sudo ionice -c 2 -n 7 nice -n 20 '"${_app}"' '
