@@ -55,7 +55,10 @@ done
     alias ethstatus='sudo ionice -c 2 -n 7 nice -n 20 ethstatus '
 
     ##Optional: same as above, but for first WLAN.
-    alias ethstatus_wlan0='sudo ionice -c 2 -n 7 nice -n 20 ethstatus -i wlan0 '
+    for _if in 'wlan0' 'wlp2s0' 'eno1'; do
+        # shellcheck disable=SC2139  #We know the var expands during the definition of the alias.
+        alias ethstatus_${_if}='sudo ionice -c 2 -n 7 nice -n 20 ethstatus -i '"${_if}"' '
+    done
 }
 
 [ "$(command -v 'iotop')" ] && {
