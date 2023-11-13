@@ -3,6 +3,12 @@
 
 ##Typically loaded through the in-built `source` command (in Bash).
 
+alias lavh='ls -lavh --color=always '
+alias lavhR='ls -lavhR --color=always '
+alias lavhr='ls -lavhR --color=always '  ##Only to make writing the above easier, the small 'r' ain't the same (reverse) as the big 'R' (recursive).
+alias egrep='egrep --line-number --color=always --with-filename '
+alias grep='grep --line-number --color=always --with-filename '
+
 ##Change this according to what the 7-Zip binary is called on your system.
 ##  As of Ubuntu 22.04 LTS the package is called `7zip` in which the binary is called `7zz`. The old package `p7zip[-full]` in which it's called `7z` was abandoned for ages and not updated beyond 16.02. The one for Ubuntu 22.04 LTS is still behind Ubuntu 22.10, but still better than the ancient 7-Zip 16.02.
 _binary_7z='7zz'
@@ -36,11 +42,11 @@ done
 
 for _app in 'aptitude' 'apt' 'apt-get'; do
     [ "$(command -v "${_app}")" ] && {
-        ##Update package listing and show updatable packages, only creating an alias matching the app in the given order.
+        ##Along with updating the Snap packages, update the native Debian packages, only creating an alias matching the app in the given order.
         ##Uses lowest possible non-idle priorities to impose as little performance penalty as possible on the other processes, _
         ##  which in turn potentially makes the upgrade process slower since every process spawned by ${_app} will inherit its priorities.
         # shellcheck disable=SC2139  #We know the var expands during the definition of the alias.
-        alias upg='sudo '"${_app}"' update; sudo '"${_app}"' full-upgrade ' && break
+        alias upg='sudo snap refresh; sudo '"${_app}"' update; sudo '"${_app}"' full-upgrade ' && break
     }
 done
 
@@ -49,7 +55,7 @@ done
     alias ethstatus='sudo ionice -c 2 -n 7 nice -n 20 ethstatus '
 
     ##Optional: same as above, but for first WLAN.
-    #alias ethstatus_wlan0='sudo ionice -c 2 -n 7 nice -n 20 ethstatus -i wlan0 '
+    alias ethstatus_wlan0='sudo ionice -c 2 -n 7 nice -n 20 ethstatus -i wlan0 '
 }
 
 [ "$(command -v 'iotop')" ] && {
